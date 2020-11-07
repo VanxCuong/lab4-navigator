@@ -8,9 +8,20 @@ This project is a starting point for a Flutter application.
 
 ```dart
 import 'package:flutter/material.dart';
+import 'animate.dart';
+import 'navigator-name.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MaterialApp(
+    title: "Test",
+    initialRoute: '/',
+    routes: {
+      // When navigating to the "/" route, build the FirstScreen widget.
+      '/': (context) => MyApp(),
+      // When navigating to the "/second" route, build the SecondScreen widget.
+      '/second': (context) => SecondRoute(),
+    },
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -22,7 +33,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Bai Tap B2.2'),
+      home: MyHomePage(title: 'Bai Tap B4.1 Navigator'),
     );
   }
 }
@@ -56,31 +67,53 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
           child: GestureDetector(
-            onTap: () => {
-               Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SecondRoute()))
-            },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                IconButton(
-                    icon: Icon(Icons.favorite),
-                    onPressed: () {
-                      setState(() {
-                        _counter++;
-                      });
-                    }),
-                Text('$_counter'),
-                FlatButton(
-                  onPressed: () => {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SecondRoute()))
-                  },
-                  color: Colors.blue,
-                  child: Text("Navigator"),
-                )
-              ],
+        onTap: () => {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => SecondRoute()))
+        },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            IconButton(
+                icon: Icon(Icons.favorite),
+                onPressed: () {
+                  setState(() {
+                    _counter++;
+                  });
+                }),
+            Text('$_counter'),
+            FlatButton(
+              onPressed: () => {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SecondRoute()))
+              },
+              color: Colors.blue,
+              child: Text("Navigator"),
             ),
+            FlatButton(
+              onPressed: () => {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MainScreen()))
+              },
+              color: Colors.blue,
+              child: Text("Animate"),
+            ),
+            FlatButton(
+              onPressed: () => {
+                Navigator.pushNamed(context, '/second')
+              },
+              color: Colors.blue,
+              child: Text("Navigator name"),
+            ),
+            FlatButton(
+              onPressed: () => {
+                Navigator.pushNamed(context, '/second')
+              },
+              color: Colors.blue,
+              child: Text("argument"),
+            ),
+          ],
+        ),
       )),
     );
   }
@@ -102,4 +135,15 @@ class SecondRoute extends StatelessWidget {
     );
   }
 }
+
 ```
+
+### Kết quả
+Trang chủ định tuyến
+![Test Image 1](screenshots/1.PNG)
+
+![Test Image 1](screenshots/2.PNG)
+![Test Image 1](screenshots/3.PNG)
+![Test Image 1](screenshots/4.PNG)
+![Test Image 1](screenshots/5.PNG)
+![Test Image 1](screenshots/5.PNG)
